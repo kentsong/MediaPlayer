@@ -13,6 +13,13 @@ import android.widget.ProgressBar;
 
 import java.io.IOException;
 
+
+/**
+ * MediaPlayer 视频播放 sample
+ * 播放气状态流程介绍：https://developer.android.com/reference/android/media/MediaPlayer
+ * 参考文章：https://www.cnblogs.com/yxx123/p/5720907.html
+ */
+
 public class MainActivity extends AppCompatActivity {
 
     private SurfaceView surfaceView;
