@@ -1,10 +1,13 @@
-package com.tianchi.myapplication;
+package mediaplayer;
 
+import com.tianchi.myapplication.R;
+
+import android.app.Activity;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -20,7 +23,7 @@ import java.io.IOException;
  * 参考文章：https://www.cnblogs.com/yxx123/p/5720907.html
  */
 
-public class MainActivity extends AppCompatActivity {
+public class MediaPlayerActivity extends AppCompatActivity {
 
     private SurfaceView surfaceView;
     private MediaPlayer player;
@@ -37,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_mediaplayer);
         surfaceView = (SurfaceView) findViewById(R.id.surfaceView);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
@@ -139,5 +142,10 @@ public class MainActivity extends AppCompatActivity {
         public void surfaceDestroyed(SurfaceHolder holder) {
 
         }
+    }
+
+    public static void launch(Activity activity) {
+        Intent intent = new Intent(activity, MediaPlayerActivity.class);
+        activity.startActivity(intent);
     }
 }

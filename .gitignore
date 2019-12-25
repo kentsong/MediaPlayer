@@ -1,11 +1,35 @@
-*.iml
-.gradle
 /local.properties
 /.idea/workspace.xml
-/.idea/libraries
-/.idea
 .DS_Store
-/build
-/captures
-.externalNativeBuild
-/ijkplayerLibrary/build
+
+# IntelliJ files
+.idea
+*.iml
+
+# gradle directory
+.gradle
+build/
+/gradle/
+gradlew
+gradlew.bat
+gradle.properties
+
+bin/*
+out/*
+
+*.apk
+*.ap_
+
+# lint files
+lint.xml
+
+# vi swap files
+*.swp
+
+# backup files
+*.bak
+
+*.hprof
+
+app/local.properties
+app/gradle
