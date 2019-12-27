@@ -52,6 +52,7 @@ public class IjkPlayer extends AbstractPlayer {
 
     @Override
     public void setOptions() {
+        mMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER,"mediacodec",0);//1为硬解 0为软解
     }
 
     @Override

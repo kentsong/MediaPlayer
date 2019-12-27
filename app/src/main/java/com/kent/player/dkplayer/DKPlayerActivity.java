@@ -108,7 +108,7 @@ public class DKPlayerActivity extends DebugActivity {
 
             //临时切换播放核心，如需全局请通过VideoConfig配置，详见MyApplication
             //使用IjkPlayer解码
-            mVideoView.setPlayerFactory(IjkPlayerFactory.create());
+//            mVideoView.setPlayerFactory(IjkPlayerFactory.create());
             //使用ExoPlayer解码
 //            mVideoView.setPlayerFactory(ExoMediaPlayerFactory.create());
             //使用MediaPlayer解码
