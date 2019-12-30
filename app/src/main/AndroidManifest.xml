@@ -3,6 +3,7 @@
     package="com.kent.player">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:name=".MyApplication"
@@ -23,6 +24,7 @@
 
         <activity android:name=".mediaplayer.MediaPlayerActivity"/>
         <activity android:name=".dkplayer.DKPlayerActivity"/>
+        <activity android:name=".dkplayer.full.FullDKPlayerActivity" />
     </application>
 
 </manifest>

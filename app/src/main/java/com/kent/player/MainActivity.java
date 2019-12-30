@@ -2,6 +2,7 @@ package com.kent.player;
 
 
 import com.kent.player.dkplayer.DKPlayerActivity;
+import com.kent.player.dkplayer.full.FullDKPlayerActivity;
 import com.kent.player.mediaplayer.MediaPlayerActivity;
 
 import android.os.Bundle;
@@ -31,6 +32,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DKPlayerActivity.launch(MainActivity.this);
+            }
+        });
+
+        findViewById(R.id.btn_dk_full).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FullDKPlayerActivity.launch(MainActivity.this);
             }
         });
     }
