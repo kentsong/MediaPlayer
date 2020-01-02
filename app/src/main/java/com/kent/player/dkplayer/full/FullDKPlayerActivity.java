@@ -1,5 +1,6 @@
 package com.kent.player.dkplayer.full;
 
+import com.dueeeke.videocontroller.AdVideoController;
 import com.dueeeke.videocontroller.StandardVideoController;
 import com.dueeeke.videoplayer.player.VideoView;
 import com.kent.player.R;
@@ -14,6 +15,8 @@ import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 /**
@@ -22,10 +25,6 @@ import android.widget.TextView;
 public class FullDKPlayerActivity extends DebugActivity {
 
     private static final String VOD_Url = "http://vfx.mtime.cn/Video/2019/03/14/mp4/190314223540373995.mp4";
-
-    TextView mTvCountDown;
-    private CountDownTimer mCountDownTimer;
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,9 +40,36 @@ public class FullDKPlayerActivity extends DebugActivity {
     protected void initView() {
         super.initView();
         mVideoView = findViewById(R.id.player);
-        mTvCountDown = findViewById(R.id.tv_countdown);
 
-        StandardVideoController controller = new StandardVideoController(this);
+        AdVideoController controller = new AdVideoController(this);
+        controller.setCountDown(5);
+        controller.setListener(new AdVideoController.AdVideoViewListener() {
+            @Override
+            public void onFinish() {
+                mVideoView.pause();
+                Animation anim = AnimationUtils.loadAnimation(FullDKPlayerActivity.this, R.anim.anim_reduce);
+
+                anim.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        mVideoView.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+
+                    }
+                });
+                mVideoView.startAnimation(anim);
+            }
+        });
+
+
         mVideoView.setVideoController(controller);
 
 //        String url = Environment.getExternalStorageDirectory().getPath() + "/ad/le.mp4";
@@ -53,18 +79,39 @@ public class FullDKPlayerActivity extends DebugActivity {
         mVideoView.start();
 
 
-        mCountDownTimer = new CountDownTimer(5 * 1000, 1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                mTvCountDown.setText("广告 " + millisUntilFinished / 1000 + "秒");
-            }
-
-            @Override
-            public void onFinish() {
-                finish();
-                overridePendingTransition(0,R.anim.anim_reduce);
-            }
-        }.start();
+//        mCountDownTimer = new CountDownTimer(5 * 1000, 1000) {
+//            @Override
+//            public void onTick(long millisUntilFinished) {
+//                mTvCountDown.setText("广告 " + millisUntilFinished / 1000 + "秒");
+//            }
+//
+//            @Override
+//            public void onFinish() {
+////                finish();
+////                overridePendingTransition(0,R.anim.anim_reduce);
+//                mVideoView.pause();
+//                Animation anim = AnimationUtils.loadAnimation(FullDKPlayerActivity.this, R.anim.anim_reduce);
+//
+//                anim.setAnimationListener(new Animation.AnimationListener() {
+//                    @Override
+//                    public void onAnimationStart(Animation animation) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onAnimationEnd(Animation animation) {
+//                        mVideoView.setVisibility(View.GONE);
+//                    }
+//
+//                    @Override
+//                    public void onAnimationRepeat(Animation animation) {
+//
+//                    }
+//                });
+//                mVideoView.startAnimation(anim);
+//            }
+//        }
+//        .start();
 
     }
 
