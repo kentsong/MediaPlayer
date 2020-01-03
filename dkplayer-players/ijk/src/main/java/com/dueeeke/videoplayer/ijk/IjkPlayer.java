@@ -7,6 +7,7 @@ import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 
@@ -20,6 +21,7 @@ import tv.danmaku.ijk.media.player.IjkMediaPlayer;
 
 public class IjkPlayer extends AbstractPlayer {
 
+    private final String TAG = IjkPlayer.class.getSimpleName();
     protected IjkMediaPlayer mMediaPlayer;
     private int mBufferedPercent;
     private Context mAppContext;
@@ -73,6 +75,7 @@ public class IjkPlayer extends AbstractPlayer {
                 mMediaPlayer.setDataSource(mAppContext, uri, headers);
             }
         } catch (Exception e) {
+            Log.d(TAG, "mMediaPlayer.setDataSource with Headers Exception");
             mPlayerEventListener.onError();
         }
     }
@@ -82,6 +85,7 @@ public class IjkPlayer extends AbstractPlayer {
         try {
             mMediaPlayer.setDataSource(new RawDataSourceProvider(fd));
         } catch (Exception e) {
+            Log.d(TAG, "mMediaPlayer.setDataSource Exception");
             mPlayerEventListener.onError();
         }
     }
@@ -91,6 +95,7 @@ public class IjkPlayer extends AbstractPlayer {
         try {
             mMediaPlayer.pause();
         } catch (IllegalStateException e) {
+            Log.d(TAG, "mMediaPlayer.pause IllegalStateException");
             mPlayerEventListener.onError();
         }
     }
@@ -100,6 +105,7 @@ public class IjkPlayer extends AbstractPlayer {
         try {
             mMediaPlayer.start();
         } catch (IllegalStateException e) {
+            Log.d(TAG, "mMediaPlayer.start IllegalStateException");
             mPlayerEventListener.onError();
         }
     }
@@ -109,6 +115,7 @@ public class IjkPlayer extends AbstractPlayer {
         try {
             mMediaPlayer.stop();
         } catch (IllegalStateException e) {
+            Log.d(TAG, "mMediaPlayer.stop IllegalStateException");
             mPlayerEventListener.onError();
         }
     }
@@ -118,6 +125,7 @@ public class IjkPlayer extends AbstractPlayer {
         try {
             mMediaPlayer.prepareAsync();
         } catch (IllegalStateException e) {
+            Log.d(TAG, "mMediaPlayer.prepareAsync IllegalStateException");
             mPlayerEventListener.onError();
         }
     }
@@ -139,6 +147,7 @@ public class IjkPlayer extends AbstractPlayer {
         try {
             mMediaPlayer.seekTo((int) time);
         } catch (IllegalStateException e) {
+            Log.d(TAG, "mMediaPlayer.seekTo IllegalStateException");
             mPlayerEventListener.onError();
         }
     }
@@ -211,6 +220,7 @@ public class IjkPlayer extends AbstractPlayer {
     private IMediaPlayer.OnErrorListener onErrorListener = new IMediaPlayer.OnErrorListener() {
         @Override
         public boolean onError(IMediaPlayer iMediaPlayer, int framework_err, int impl_err) {
+            Log.d(TAG, "IMediaPlayer onError framework_err= "+framework_err+", impl_err="+impl_err);
             mPlayerEventListener.onError();
             return true;
         }
