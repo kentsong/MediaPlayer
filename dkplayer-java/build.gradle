@@ -14,10 +14,14 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     compileOnly project.ext.annotation
+    api "tv.danmaku.ijk.media:ijkplayer-java:$project.ijkPlayerVersion"
+
 }
 
 ext {
     releaseArtifact = 'com.kent.player.dkplayer-java'
+    releaseArtifact = 'player-ijk'
+
 }
 
 //apply from: '../publish.gradle'
