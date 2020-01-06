@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     >
 
-    <com.dueeeke.videoplayer.player.VideoView
+    <com.kent.player.dkplayer.full.AdVideoView
         android:id="@+id/player"
         android:layout_width="0dp"
         android:layout_height="0dp"

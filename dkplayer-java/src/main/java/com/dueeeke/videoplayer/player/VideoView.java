@@ -12,7 +12,9 @@ import android.os.Build;
 import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -1079,5 +1081,11 @@ public class VideoView<P extends AbstractPlayer> extends FrameLayout
         //activity切到后台后可能被系统回收，故在此处进行进度保存
         saveProgress();
         return super.onSaveInstanceState();
+    }
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        Log.d("ttt", ""+event.getKeyCode());
+        return super.dispatchKeyEvent(event);
     }
 }

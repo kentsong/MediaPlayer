@@ -15,6 +15,8 @@ import com.dueeeke.videoplayer.util.L;
 import android.content.Context;
 import android.os.CountDownTimer;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
@@ -36,6 +38,7 @@ public class AdVideoController extends BaseVideoController implements View.OnCli
     private TextView mCountDownTv;
     private CountDownTimer mCountDownTimer;
     private AdVideoViewListener mListener;
+    private boolean mSkipEnable;
 
     public AdVideoController(@NonNull Context context) {
         this(context, null);
@@ -59,6 +62,7 @@ public class AdVideoController extends BaseVideoController implements View.OnCli
         super.initView();
         mLoadingProgress = findViewById(R.id.loading);
         mCountDownTv = findViewById(R.id.tv_countdown);
+        setFocusable(true);
     }
 
     public void setListener(AdVideoViewListener listener) {
@@ -69,39 +73,23 @@ public class AdVideoController extends BaseVideoController implements View.OnCli
         mCountDownTimer = new CountDownTimer(second * 1000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                mCountDownTv.setText("广告 " + millisUntilFinished / 1000 + "秒");
+                long second = millisUntilFinished / 1000;
+                if (second <= 3) {
+                    mCountDownTv.setText("广告 " + second + "秒 (按Enter可跳過)");
+                    mSkipEnable = true;
+                } else {
+                    mCountDownTv.setText("广告 " + second + "秒");
+                }
             }
 
             @Override
             public void onFinish() {
-                if(mListener!= null){
+                if (mListener != null) {
                     mListener.onFinish();
                 }
             }
         }
         .start();
-    }
-
-    /**
-     * 快速添加各个组件
-     *
-     * @param title  标题
-     * @param isLive 是否为直播
-     */
-    public void addDefaultControlComponent(String title, boolean isLive) {
-        CompleteView completeView = new CompleteView(getContext());
-        ErrorView errorView = new ErrorView(getContext());
-        PrepareView prepareView = new PrepareView(getContext());
-        prepareView.setClickStart();
-        TitleView titleView = new TitleView(getContext());
-        titleView.setTitle(title);
-        addControlComponent(completeView, errorView, prepareView, titleView);
-        if (isLive) {
-            addControlComponent(new LiveControlView(getContext()));
-        } else {
-            addControlComponent(new VodControlView(getContext()));
-        }
-        addControlComponent(new GestureView(getContext()));
     }
 
     @Override
@@ -111,7 +99,6 @@ public class AdVideoController extends BaseVideoController implements View.OnCli
             mControlWrapper.toggleLockState();
         }
     }
-
 
     @Override
     protected void onPlayerStateChanged(int playerState) {
@@ -172,6 +159,19 @@ public class AdVideoController extends BaseVideoController implements View.OnCli
                 mLoadingProgress.setVisibility(GONE);
                 break;
         }
+    }
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        Log.d("ttt", ""+event.getKeyCode());
+        if (event.getAction() == KeyEvent.ACTION_DOWN) {
+            if (event.getKeyCode() == KeyEvent.KEYCODE_DPAD_CENTER || event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+                if(mSkipEnable && mListener!= null){
+                    mListener.onFinish();
+                }
+            }
+        }
+        return super.dispatchKeyEvent(event);
     }
 
     @Override

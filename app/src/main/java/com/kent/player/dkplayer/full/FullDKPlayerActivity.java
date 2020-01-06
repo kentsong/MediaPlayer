@@ -39,56 +39,15 @@ public class FullDKPlayerActivity extends DebugActivity {
     @Override
     protected void initView() {
         super.initView();
-        mVideoView = findViewById(R.id.player);
 
-        AdVideoController controller = new AdVideoController(this);
-        controller.setCountDown(5);
-        controller.setListener(new AdVideoController.AdVideoViewListener() {
-            @Override
-            public void onFinish() {
-                mVideoView.pause();
-                Animation anim = AnimationUtils.loadAnimation(FullDKPlayerActivity.this, R.anim.anim_reduce);
+        AdVideoView adVideoView = findViewById(R.id.player);
+        mVideoView = adVideoView.getVideoView();
 
-                anim.setAnimationListener(new Animation.AnimationListener() {
-                    @Override
-                    public void onAnimationStart(Animation animation) {
-
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animation animation) {
-                        mVideoView.setVisibility(View.GONE);
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animation animation) {
-
-                    }
-                });
-                mVideoView.startAnimation(anim);
-            }
-        });
-
-
-        mVideoView.setVideoController(controller);
-
-//        String url = Environment.getExternalStorageDirectory().getPath() + "/ad/le.mp4";
-        String url = "dev/le.mp4";
-        Log.d("FullDKPlayerActivity", "url=" + url);
-        mVideoView.setUrl(url);
-        mVideoView.start();
-
-
-//        mCountDownTimer = new CountDownTimer(5 * 1000, 1000) {
-//            @Override
-//            public void onTick(long millisUntilFinished) {
-//                mTvCountDown.setText("广告 " + millisUntilFinished / 1000 + "秒");
-//            }
-//
+//        AdVideoController controller = new AdVideoController(this);
+//        controller.setCountDown(5);
+//        controller.setListener(new AdVideoController.AdVideoViewListener() {
 //            @Override
 //            public void onFinish() {
-////                finish();
-////                overridePendingTransition(0,R.anim.anim_reduce);
 //                mVideoView.pause();
 //                Animation anim = AnimationUtils.loadAnimation(FullDKPlayerActivity.this, R.anim.anim_reduce);
 //
@@ -110,9 +69,16 @@ public class FullDKPlayerActivity extends DebugActivity {
 //                });
 //                mVideoView.startAnimation(anim);
 //            }
-//        }
-//        .start();
+//        });
 
+
+//        mVideoView.setVideoController(controller);
+
+//        String url = Environment.getExternalStorageDirectory().getPath() + "/ad/le.mp4";
+//        String url = "dev/le.mp4";
+//        Log.d("FullDKPlayerActivity", "url=" + url);
+//        mVideoView.setUrl(url);
+//        mVideoView.start();
     }
 
     public static void launch(Activity activity) {

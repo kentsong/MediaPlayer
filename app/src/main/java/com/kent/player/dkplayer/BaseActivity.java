@@ -51,14 +51,14 @@ public class BaseActivity<T extends VideoView> extends AppCompatActivity {
             setContentView(getContentView());
         }
 
-        //标题栏设置
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setTitle(getTitleResId());
-            if (enableBack()) {
-                actionBar.setDisplayHomeAsUpEnabled(true);
-            }
-        }
+//        //标题栏设置
+//        ActionBar actionBar = getSupportActionBar();
+//        if (actionBar != null) {
+//            actionBar.setTitle(getTitleResId());
+//            if (enableBack()) {
+//                actionBar.setDisplayHomeAsUpEnabled(true);
+//            }
+//        }
 
         initView();
 
