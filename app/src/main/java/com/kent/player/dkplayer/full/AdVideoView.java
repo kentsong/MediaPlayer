@@ -22,6 +22,7 @@ public class AdVideoView extends FrameLayout {
 
     private VideoView mVideoView;
     private AdVideoController mController;
+    private AdProvider mAdProvider;
 
     public AdVideoView(@NonNull Context context) {
         this(context, null);
@@ -85,5 +86,9 @@ public class AdVideoView extends FrameLayout {
 
     public VideoView getVideoView() {
         return mVideoView;
+    }
+
+    public void setAdProvider(AdProvider adProvider) {
+        mAdProvider = adProvider;
     }
 }

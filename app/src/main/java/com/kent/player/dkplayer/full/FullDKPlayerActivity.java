@@ -42,43 +42,6 @@ public class FullDKPlayerActivity extends DebugActivity {
 
         AdVideoView adVideoView = findViewById(R.id.player);
         mVideoView = adVideoView.getVideoView();
-
-//        AdVideoController controller = new AdVideoController(this);
-//        controller.setCountDown(5);
-//        controller.setListener(new AdVideoController.AdVideoViewListener() {
-//            @Override
-//            public void onFinish() {
-//                mVideoView.pause();
-//                Animation anim = AnimationUtils.loadAnimation(FullDKPlayerActivity.this, R.anim.anim_reduce);
-//
-//                anim.setAnimationListener(new Animation.AnimationListener() {
-//                    @Override
-//                    public void onAnimationStart(Animation animation) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onAnimationEnd(Animation animation) {
-//                        mVideoView.setVisibility(View.GONE);
-//                    }
-//
-//                    @Override
-//                    public void onAnimationRepeat(Animation animation) {
-//
-//                    }
-//                });
-//                mVideoView.startAnimation(anim);
-//            }
-//        });
-
-
-//        mVideoView.setVideoController(controller);
-
-//        String url = Environment.getExternalStorageDirectory().getPath() + "/ad/le.mp4";
-//        String url = "dev/le.mp4";
-//        Log.d("FullDKPlayerActivity", "url=" + url);
-//        mVideoView.setUrl(url);
-//        mVideoView.start();
     }
 
     public static void launch(Activity activity) {
